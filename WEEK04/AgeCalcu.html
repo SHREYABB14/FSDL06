@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Age Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      text-align: center;
+    }
+    input {
+      padding: 10px;
+      margin: 10px;
+      width: 80%;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+    button {
+      padding: 10px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    p {
+      font-size: 18px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Age Calculator</h2>
+    <input type="year" id="birthyear" placeholder="Enter your birthyear" required>
+    <button onclick="calculateAge()">Calculate Age</button>
+    <p id="ageOutput"></p>
+  </div>
+
+  <script>
+    function calculateAge() {
+      const birthyear = document.getElementById('birthyear').value;
+      const birthyearObj = new Date(birthyear);
+      
+      if (!birthyear) {
+        alert("Please enter your birthyear.");
+        return;
+      }
+
+      const currentDate = new Date();
+      let age = currentDate.getFullYear() - birthyearObj.getFullYear();
+     
+
+      
+
+      document.getElementById('ageOutput').textContent = `You are ${age} years old.`;
+    }
+  </script>
+
+</body>
+</html>

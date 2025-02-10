@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Tracker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      color: #333;
+    }
+    .container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 400px;
+    }
+    h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    input {
+      padding: 10px;
+      width: 80%;
+      font-size: 16px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      color: white;
+      background-color: #3498db;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    .expense-list {
+      margin-top: 20px;
+    }
+    .expense-item {
+      padding: 10px;
+      background-color: #ecf0f1;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .total {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Expense Tracker</h2>
+    <input type="text" id="expenseName" placeholder="Expense name">
+    <input type="number" id="expenseAmount" placeholder="Amount" min="1">
+    <button onclick="addExpense()">Add Expense</button>
+
+    <div class="expense-list" id="expenseList"></div>
+    <div class="total" id="total">Total: $0</div>
+  </div>
+
+  <script>
+    let totalExpenses = 0;
+    const expenseList = [];
+
+    // Function to add an expense
+    function addExpense() {
+      const name = document.getElementById('expenseName').value;
+      const amount = parseFloat(document.getElementById('expenseAmount').value);
+
+      // Check if the input values are valid
+      if (!name || isNaN(amount) || amount <= 0) {
+        alert("Please enter a valid expense name and amount.");
+        return;
+      }
+
+      // Add the expense to the list
+      const expense = { name, amount };
+      expenseList.push(expense);
+
+      // Update the total expenses
+      totalExpenses += amount;
+
+      // Display the expenses
+      displayExpenses();
+      
+      // Reset input fields
+      document.getElementById('expenseName').value = '';
+      document.getElementById('expenseAmount').value = '';
+    }
+
+    // Function to display all expenses
+    function displayExpenses() {
+      const expenseListDiv = document.getElementById('expenseList');
+      expenseListDiv.innerHTML = '';
+
+      expenseList.forEach(expense => {
+        const expenseDiv = document.createElement('div');
+        expenseDiv.classList.add('expense-item');
+        expenseDiv.innerHTML = `${expense.name}: $${expense.amount.toFixed(2)}`;
+        expenseListDiv.appendChild(expenseDiv);
+      });
+
+      // Update the total amount
+      document.getElementById('total').innerHTML = `Total: $${totalExpenses.toFixed(2)}`;
+    }
+  </script>
+
+</body>
+</html>
