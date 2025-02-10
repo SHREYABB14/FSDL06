@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Poll Application</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 400px;
+      margin: 20px auto;
+      text-align: center;
+    }
+    h3 {
+      color: #333;
+    }
+    button {
+      margin: 5px;
+      padding: 10px 15px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #results {
+      margin-top: 15px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  const pollData = {
+    options: ["Python", "JavaScript", "C++", "Java"],
+    votes: [0, 0, 0, 0]
+  };
+
+  function renderPoll() {
+    document.body.innerHTML = `
+      <h3>Vote for Your Favorite Programming Language:</h3>
+      ${pollData.options.map((opt, i) => `<button onclick='vote(${i})'>${opt}</button>`).join('')}
+      <div id='results'></div>
+    `;
+  }
+
+  function vote(i) {
+    pollData.votes[i]++;
+    showResults();
+  }
+
+  function showResults() {
+    document.getElementById("results").innerHTML = pollData.options
+      .map((opt, i) => `${opt}: ${pollData.votes[i]} votes`)
+      .join('<br>');
+  }
+
+  window.onload = renderPoll;
+</script>
+
+</body>
+</html>

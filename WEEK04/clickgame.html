@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Click Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      flex-direction: column;
+    }
+    .container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      text-align: center;
+    }
+    button {
+      padding: 15px;
+      font-size: 20px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    p {
+      font-size: 18px;
+      color: #333;
+    }
+    #score {
+      font-size: 24px;
+      color: #2ecc71;
+    }
+    #timer {
+      font-size: 24px;
+      color: #e74c3c;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Click Game</h2>
+    <button onclick="incrementScore()">Click Me!</button>
+    <p>Score: <span id="score">0</span></p>
+    <p>Time Remaining: <span id="timer">10</span> seconds</p>
+    <button id="startBtn" onclick="startGame()">Start Game</button>
+  </div>
+
+  <script>
+    let score = 0;
+    let timeLeft = 10;
+    let gameInterval;
+    let timerInterval;
+
+    // Start the game
+    function startGame() {
+      score = 0;
+      timeLeft = 10;
+      document.getElementById('score').textContent = score;
+      document.getElementById('timer').textContent = timeLeft;
+
+      // Disable the start button during the game
+      document.getElementById('startBtn').disabled = true;
+      document.querySelector("button[onclick='incrementScore()']").disabled = false;
+
+      // Start the timer
+      timerInterval = setInterval(function() {
+        timeLeft--;
+        document.getElementById('timer').textContent = timeLeft;
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          endGame();
+        }
+      }, 1000);
+    }
+
+    // Increment score when clicked
+    function incrementScore() {
+      score++;
+      document.getElementById('score').textContent = score;
+    }
+
+    // End the game
+    function endGame() {
+      alert('Game Over! Your score is ' + score);
+      document.querySelector("button[onclick='incrementScore()']").disabled = true;
+      document.getElementById('startBtn').disabled = false;
+    }
+  </script>
+
+</body>
+</html>
