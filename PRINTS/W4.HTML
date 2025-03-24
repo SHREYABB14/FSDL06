@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Demo</title>
+</head>
+<body>
+
+    <h1>JavaScript Features</h1>
+    <button onclick="showMessage()">Click Me</button>
+    <p id="output"></p>
+
+    <script>
+        // Task 4: Variables, Operators, Conditions, Loops, Functions, Events, Classes & Objects
+        let num = 10;
+        let result = num > 5 ? "Greater than 5" : "Less or equal to 5"; // Condition
+        console.log(result);
+
+        function showMessage() {
+            document.getElementById("output").innerText = "Button Clicked!";
+        }
+
+        for (let i = 1; i <= 3; i++) console.log("Loop:", i); // Loop
+
+        class Person {
+            constructor(name) { this.name = name; }
+            greet() { return `Hello, ${this.name}`; }
+        }
+
+        let user = new Person("Alice");
+        console.log(user.greet());
+
+        // Task 5: Error handling, Validations, Arrays, String, Date
+        try { JSON.parse("{invalid}"); } 
+        catch (e) { console.error("Error:", e.message); } // Error handling
+
+        let arr = [1, 2, 3];
+        console.log("Array:", arr.join(", ")); // Array
+
+        let str = "JavaScript";
+        console.log("String Length:", str.length); // String
+
+        let today = new Date();
+        console.log("Date:", today.toDateString()); // Date
+
+    </script>
+
+</body>
+</html>

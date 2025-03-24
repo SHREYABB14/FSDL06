@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React & Angular</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+
+    <!-- React App -->
+    <div id="react-root"></div>
+
+    <!-- Angular App -->
+    <div ng-app="myApp" ng-controller="MainCtrl">
+        <h1>{{ title }}</h1>
+        <input type="text" ng-model="message">
+        <p>{{ message }}</p>
+        <button ng-click="showAlert()">Click Me</button>
+    </div>
+
+    <script type="text/babel">
+        // React Code
+        function App() {
+            const [count, setCount] = React.useState(0);
+            const inputRef = React.useRef(null);
+
+            return (
+                <div>
+                    <h1>React App</h1>
+                    <p>Count: {count}</p>
+                    <button onClick={() => setCount(count + 1)}>Increment</button>
+                    <input ref={inputRef} placeholder="Type here" />
+                </div>
+            );
+        }
+        ReactDOM.render(<App />, document.getElementById("react-root"));
+    </script>
+
+    <script>
+        // AngularJS Code
+        angular.module('myApp', []).controller('MainCtrl', function($scope) {
+            $scope.title = "Angular App";
+            $scope.message = "Hello Angular!";
+            $scope.showAlert = function() { alert("Button Clicked!"); };
+        });
+    </script>
+
+</body>
+</html>
