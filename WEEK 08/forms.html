@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html ng-app="validationApp">
+<head>
+    <title>AngularJS Events and Validations</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="ValidationController">
+
+    <h1>AngularJS Events and Validations</h1>
+
+    <!-- Form with validation -->
+    <form name="userForm" novalidate ng-submit="submitForm(userForm)">
+
+        <!-- Name Input -->
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" ng-model="user.name" required />
+        <span ng-show="userForm.name.$touched && userForm.name.$invalid" style="color: red;">
+            Name is required.
+        </span>
+        <br /><br />
+
+        <!-- Email Input -->
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" ng-model="user.email" required />
+        <span ng-show="userForm.email.$touched && userForm.email.$invalid" style="color: red;">
+            Valid email is required.
+        </span>
+        <br /><br />
+
+        <!-- Age Input -->
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" ng-model="user.age" min="18" max="100" required />
+        <span ng-show="userForm.age.$touched && userForm.age.$invalid" style="color: red;">
+            Age must be between 18 and 100.
+        </span>
+        <br /><br />
+
+        <!-- Submit Button -->
+        <button type="submit" ng-disabled="userForm.$invalid">Submit</button>
+    </form>
+
+    <!-- Display Submitted Data -->
+    <div ng-if="submitted">
+        <h2>Submitted Data:</h2>
+        <p><strong>Name:</strong> {{ user.name }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Age:</strong> {{ user.age }}</p>
+    </div>
+
+    <script>
+        // AngularJS Application
+        var app = angular.module('validationApp', []);
+
+        // Controller
+        app.controller('ValidationController', function($scope) {
+            $scope.user = {}; // Object to hold form data
+            $scope.submitted = false;
+
+            // Submit Form Function
+            $scope.submitForm = function(form) {
+                if (form.$valid) {
+                    $scope.submitted = true; // Mark form as submitted
+                    console.log("Form Submitted Successfully:", $scope.user);
+                } else {
+                    console.log("Form is invalid.");
+                }
+            };
+        });
+    </script>
+</body>
+</html>
