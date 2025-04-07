@@ -10,7 +10,7 @@ function greet(name, callback) {
   }
   
   // Calling greet and passing sayBye as callback
-  greet('Shreya', sayBye);
+  greet('SHREYA', sayBye);
   
   // ---------------------------------------------
   
